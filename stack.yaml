@@ -35,12 +35,12 @@ resolver: lts-10.4
 #  - wai
 packages:
 - .
-packages:
-- location: '.'
-- location: ../hdbc-odbc-41b25fcd8aad5c7e36cf780cb77d7e5b77b7062b
-  extra-dep: true
-- location: ../hdbc_nextresult
-  extra-dep: true
+# packages:
+# - location: '.'
+# - location: ../hdbc-odbc-41b25fcd8aad5c7e36cf780cb77d7e5b77b7062b
+#   extra-dep: true
+# - location: ../hdbc_nextresult
+#  extra-dep: true
 
 # Dependency packages to be pulled from upstream that are not in the resolver
 # using the same syntax as the packages field.

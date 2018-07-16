@@ -64,10 +64,10 @@ testRunRaw fn = do
 create table Prepared
 create table Run
 create table RunRaw
-prepared before
-prepared: 59.21338677406311
-run before
-run: 158.01503801345825
-runraw before
-runraw: 92.51529145240784
+hdbc prepared before
+hdbc prepared: 59.21338677406311
+hdbc run before
+hdbc run: 158.01503801345825
+hdbc runraw before
+hdbc runraw: 92.51529145240784
 -}
