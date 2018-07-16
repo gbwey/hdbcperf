@@ -5,20 +5,13 @@ import Database.ODBC.TH
 import System.IO
 import qualified Data.List.Split as SP
 import Control.Monad
-import Data.Time.Clock.POSIX
 import Control.Exception 
 import TestConnectionString (connstr)
 import qualified Data.Text as T
 import Data.String
 import qualified Data.ByteString.Char8 as B
 import Data.ByteString (ByteString)
-
-main :: IO ()
-main = perf largefn
-
-smallfn, largefn :: FilePath
-smallfn = "testsmall.dat" -- 1000
-largefn = "testlarge.dat" -- 100,000
+import Helper (time)
 
 createTable :: String -> IO ()
 createTable tab = do
@@ -33,25 +26,9 @@ perf :: FilePath -> IO ()
 perf fn = do
   createTable "OdbcTH" 
   createTable "OdbcRaw" 
-  time "odbcTH" $ testOdbcTH fn  
-  time "odbcraw" $ testOdbcRaw fn 
+  time "odbc TH" $ testOdbcTH fn  
+  time "odbc raw" $ testOdbcRaw fn 
   
-time_ :: IO a -> IO Double
-time_ act = do
-  start <- getTime
-  _ <- act
-  end <- getTime
-  return $! end - start
-
-time :: String -> IO a -> IO ()
-time s ioa = do 
- putStrLn $ s ++ " before"
- t <- time_ ioa 
- putStrLn $ s ++ ": " ++ show t
-
-getTime :: IO Double
-getTime = realToFrac <$> getPOSIXTime
-
 testOdbcTH :: FilePath -> IO ()  
 testOdbcTH fn = do
   xs <- readFile fn
