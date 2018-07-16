@@ -16,9 +16,9 @@ dependencies:
   - QuickCheck
   - time
   - odbc == 0.2.0
-  - HDBC-odbc == 2.5.0.2
+  - HDBC-odbc
   - split
-  - HDBC == 2.4.0.3
+  - HDBC 
   - text
   - bytestring
 
