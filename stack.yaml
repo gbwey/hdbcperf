@@ -34,9 +34,16 @@ resolver: lts-10.4
 #  - auto-update
 #  - wai
 packages:
-- .
-# packages:
-# - location: '.'
+- location: '.'
+- location:
+    git: https://github.com/gbwey/hdbc.git
+    commit: 7bd94f145b0ceb759c5f625568f1531dc65275c6
+  extra-dep: true
+- location:
+    git: https://github.com/gbwey/hdbc-odbc.git
+    commit: 94f633f31db195d129a2ad9a63e61d5f76ef9685
+  extra-dep: true
+    
 # - location: ../hdbc-odbc-41b25fcd8aad5c7e36cf780cb77d7e5b77b7062b
 #   extra-dep: true
 # - location: ../hdbc_nextresult
@@ -48,7 +55,8 @@ packages:
 extra-deps: 
 - odbc-0.2.0
 - formatting-6.3.6
-- HDBC-odbc-2.5.0.1
+# - HDBC-2.4.0.3
+# - HDBC-odbc-2.5.0.2
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

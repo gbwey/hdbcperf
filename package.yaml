@@ -16,12 +16,17 @@ dependencies:
   - QuickCheck
   - time
   - odbc == 0.2.0
-  - HDBC-odbc
+  - HDBC-odbc == 2.5.0.2
   - split
-  - HDBC 
+  - HDBC == 2.4.0.3
   - text
   - bytestring
-
+  - criterion
+  - optparse-applicative
+  - transformers
+  - mtl
+  - directory
+  
 executables:
   hdbcperf:
     source-dirs:      src

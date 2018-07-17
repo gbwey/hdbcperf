@@ -9,7 +9,8 @@ import qualified Data.List.Split as SP
 import Control.Monad
 import Control.Exception 
 import TestConnectionString (connstr)
-import Helper (time)
+import Helper (time,testfn)
+
 --connstr :: String  
 --connstr = "Driver={SQL Server Native Client 11.0};Server=?;Database=?;uid=?;pwd=?;MARS_Connection=YES"  
 

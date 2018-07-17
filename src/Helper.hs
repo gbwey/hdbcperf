@@ -16,3 +16,7 @@ time s ioa = do
 
 getTime :: IO Double
 getTime = realToFrac <$> getPOSIXTime
+
+testfn :: Int -> FilePath
+testfn i = "test" ++ show i ++ ".dat"
+
