@@ -1,0 +1,521 @@
+17 14:25:59 D:\haskell\hdbcperf>stack exec hdbcperf
+benchmarking small/odbc TH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+time                 226.9 ms   (193.3 ms .. 258.9 ms)
+                     0.982 R-¦   (0.932 R-¦ .. 1.000 R-¦)
+mean                 207.8 ms   (196.6 ms .. 220.4 ms)
+std dev              16.35 ms   (11.65 ms .. 21.67 ms)
+variance introduced by outliers: 15% (moderately inflated)
+
+benchmarking small/odbc Raw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+time                 195.3 ms   (147.3 ms .. 233.5 ms)
+                     0.975 R-¦   (0.904 R-¦ .. 1.000 R-¦)
+mean                 200.7 ms   (187.3 ms .. 220.5 ms)
+std dev              20.56 ms   (7.008 ms .. 28.73 ms)
+variance introduced by outliers: 31% (moderately inflated)
+
+benchmarking small/odbc Raw Commit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+time                 201.0 ms   (168.4 ms .. 231.8 ms)
+                     0.985 R-¦   (0.942 R-¦ .. 1.000 R-¦)
+mean                 206.9 ms   (194.6 ms .. 229.1 ms)
+std dev              20.90 ms   (5.788 ms .. 28.67 ms)
+variance introduced by outliers: 30% (moderately inflated)
+
+benchmarking small/hdbc prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+time                 107.8 ms   (104.6 ms .. 111.9 ms)
+                     0.999 R-¦   (0.997 R-¦ .. 1.000 R-¦)
+mean                 108.5 ms   (106.8 ms .. 109.9 ms)
+std dev              2.266 ms   (1.596 ms .. 3.109 ms)
+
+benchmarking small/hdbc run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+time                 188.7 ms   (183.1 ms .. 193.4 ms)
+                     1.000 R-¦   (0.999 R-¦ .. 1.000 R-¦)
+mean                 192.1 ms   (190.3 ms .. 193.8 ms)
+std dev              2.267 ms   (1.056 ms .. 3.339 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking small/hdbc runraw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+time                 211.9 ms   (191.5 ms .. 240.0 ms)
+                     0.991 R-¦   (0.983 R-¦ .. 1.000 R-¦)
+mean                 195.3 ms   (190.2 ms .. 209.1 ms)
+std dev              9.997 ms   (320.4 us .. 12.78 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking medium/odbc TH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+time                 1.555 s    (1.448 s .. 1.610 s)
+                     0.999 R-¦   (0.999 R-¦ .. 1.000 R-¦)
+mean                 1.550 s    (1.532 s .. 1.562 s)
+std dev              17.82 ms   (0.0 s .. 20.46 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc Raw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+time                 1.271 s    (1.173 s .. 1.344 s)
+                     0.999 R-¦   (0.998 R-¦ .. 1.000 R-¦)
+mean                 1.298 s    (1.276 s .. 1.315 s)
+std dev              26.75 ms   (0.0 s .. 29.68 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc Raw Commit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+time                 1.333 s    (1.256 s .. 1.483 s)
+                     0.999 R-¦   (0.997 R-¦ .. 1.000 R-¦)
+mean                 1.324 s    (1.301 s .. 1.339 s)
+std dev              22.79 ms   (0.0 s .. 26.31 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/hdbc prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+time                 660.3 ms   (555.9 ms .. 734.5 ms)
+                     0.996 R-¦   (0.995 R-¦ .. 1.000 R-¦)
+mean                 677.2 ms   (654.5 ms .. 688.9 ms)
+std dev              19.65 ms   (0.0 s .. 20.26 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/hdbc run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+time                 1.556 s    (1.462 s .. 1.732 s)
+                     0.999 R-¦   (0.996 R-¦ .. 1.000 R-¦)
+mean                 1.516 s    (1.491 s .. 1.536 s)
+std dev              31.38 ms   (0.0 s .. 34.76 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/hdbc runraw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+time                 1.420 s    (1.388 s .. 1.486 s)
+                     1.000 R-¦   (0.999 R-¦ .. 1.000 R-¦)
+mean                 1.441 s    (1.430 s .. 1.445 s)
+std dev              9.437 ms   (0.0 s .. 10.38 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc TH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+create table OdbcTH
+time                 14.55 s    (13.17 s .. 16.12 s)
+                     0.999 R-¦   (0.995 R-¦ .. 1.000 R-¦)
+mean                 14.46 s    (14.08 s .. 14.68 s)
+std dev              345.7 ms   (0.0 s .. 393.1 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc Raw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+create table OdbcRaw
+time                 12.84 s    (12.56 s .. 13.02 s)
+                     1.000 R-¦   (1.000 R-¦ .. 1.000 R-¦)
+mean                 12.65 s    (12.55 s .. 12.70 s)
+std dev              81.45 ms   (0.0 s .. 90.06 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc Raw Commit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+create table OdbcRawCommit
+time                 12.63 s    (12.11 s .. 13.09 s)
+                     1.000 R-¦   (0.999 R-¦ .. 1.000 R-¦)
+mean                 12.77 s    (12.65 s .. 12.86 s)
+std dev              133.7 ms   (0.0 s .. 153.7 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/hdbc prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+create table Prepared
+time                 6.406 s    (6.280 s .. 6.620 s)
+                     1.000 R-¦   (1.000 R-¦ .. 1.000 R-¦)
+mean                 6.256 s    (6.207 s .. 6.329 s)
+std dev              64.30 ms   (0.0 s .. 70.18 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/hdbc run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+create table Run
+time                 14.80 s    (14.19 s .. NaN s)
+                     1.000 R-¦   (0.999 R-¦ .. 1.000 R-¦)
+mean                 14.84 s    (14.70 s .. 14.90 s)
+std dev              130.5 ms   (0.0 s .. 147.1 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/hdbc runraw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+create table RunRaw
+time                 14.90 s    (14.06 s .. NaN s)
+                     1.000 R-¦   (0.999 R-¦ .. 1.000 R-¦)
+mean                 14.79 s    (14.63 s .. 14.89 s)
+std dev              148.4 ms   (0.0 s .. 163.0 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+
+17 14:49:10 D:\haskell\hdbcperf>

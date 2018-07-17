@@ -9,13 +9,15 @@ import Criterion.Main
 
 criterion :: String -> Int -> Benchmark
 criterion desc sz = 
-    bgroup desc (let fn = testfn sz in [
+  let fn = testfn sz 
+  in bgroup desc [
       bench "odbc TH" $ nfIO (O.createTable "OdbcTH" >> O.testOdbcTH fn)
     , bench "odbc Raw" $ nfIO (O.createTable "OdbcRaw" >> O.testOdbcRaw fn)
+    , bench "odbc Raw Commit" $ nfIO (O.createTable "OdbcRawCommit" >> O.testOdbcRawCommit fn)
     , bench "hdbc prepared" $ nfIO (H.createTable "Prepared" >> H.testPrepared fn)
     , bench "hdbc run" $ nfIO (H.createTable "Run" >> H.testRun fn)
     , bench "hdbc runraw" $ nfIO (H.createTable "RunRaw" >> H.testRun fn)
-    ])
+    ]
 
 main :: IO ()
 main = do

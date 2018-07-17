@@ -26,8 +26,10 @@ perf :: FilePath -> IO ()
 perf fn = do
   createTable "OdbcTH" 
   createTable "OdbcRaw" 
+  createTable "OdbcRawCommit" 
   time "odbc TH" $ testOdbcTH fn  
   time "odbc raw" $ testOdbcRaw fn 
+  time "odbc raw commit" $ testOdbcRawCommit fn 
   
 testOdbcTH :: FilePath -> IO ()  
 testOdbcTH fn = do
@@ -38,15 +40,22 @@ testOdbcTH fn = do
       let dd :: Double = read d
       let ss :: ByteString = B.pack s
       exec conn [sql|insert into OdbcTH values ($ii,$ss,$dd)|]
-    --  when (n `mod` 100 == 0) $ commit conn
 
 testOdbcRaw :: FilePath -> IO ()  
 testOdbcRaw fn = do
   xs <- readFile fn
-  bracket (connect $ T.pack connstr) close $ \conn -> do
+  bracket (connect (T.pack connstr)) close $ \conn -> do
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
       exec conn (fromString ("insert into OdbcRaw values(" ++ i ++ ",'" ++ s ++ "'," ++ d ++ ")"))
-    --  when (n `mod` 100 == 0) $ commit conn
+
+testOdbcRawCommit :: FilePath -> IO ()  
+testOdbcRawCommit fn = do
+  xs <- readFile fn
+  bracket (connect (T.pack connstr)) close $ \conn -> do
+    exec conn "set implicit_transactions off"
+    forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
+      exec conn (fromString ("insert into OdbcRawCommit values(" ++ i ++ ",'" ++ s ++ "'," ++ d ++ ")"))
+
 {-
 *TestPerfOdbc> main
 create table OdbcTH
