@@ -51,6 +51,11 @@ myOptions = MyOptions
       <> short 's'
       <> help ("small file size " ++ show small) )
      <|> 
+      flag' mega
+       ( long "mega"
+      <> short 'x'
+      <> help ("mega file size " ++ show mega) )
+     <|> 
       option auto 
        ( long "rows"
       <> short 'i'
