@@ -1,20 +1,21 @@
 {-# LANGUAGE RecordWildCards #-}
+{-# OPTIONS -Wall #-}
 module Main where
 import qualified TestPerfOdbc as O
 import qualified TestPerf as H
 import qualified GenTestData as G
-import System.Environment 
-import Data.List
-import Data.Bool
+--import System.Environment 
+--import Data.List
 import Options.Applicative hiding (option,header)
 import Options.Applicative 
-import qualified Options.Applicative as O
+--import qualified Options.Applicative as O
 import System.Directory
 import Helper
 import Data.Monoid
 import Control.Monad
 import Criterion.Main
 
+criterion :: String -> Int -> Benchmark
 criterion desc sz = 
     bgroup desc (let fn = testfn sz in [
       bench "odbc TH" $ nfIO (O.createTable "OdbcTH" >> O.testOdbcTH fn)
@@ -24,10 +25,11 @@ criterion desc sz =
     , bench "hdbc runraw" $ nfIO (H.createTable "RunRaw" >> H.testRun fn)
     ])
 
-docriterion = defaultMain [
-    criterion "small" 1000
-  , criterion "medium" 10000
-  , criterion "large" 100000
+runCriterion :: IO ()
+runCriterion = defaultMain [
+    criterion "small" small
+  , criterion "medium" medium
+  , criterion "large" large
   ]
   
 main :: IO ()
@@ -37,25 +39,34 @@ main = do
     opts = info (myOptions <**> helper)
       ( fullDesc
      <> progDesc "hdbc odbc performance tests"
-     <> header "hdbc odbc performance tests version")
+     <> header "hdbc odbc performance tests")
 
 withInfo :: Parser a -> String -> ParserInfo a
 withInfo opts desc = info (helper <*> opts) $ progDesc desc
 
 runit :: MyOptions -> IO ()
-runit w@MyOptions {..} = do
+runit MyOptions {..} = do
   case oCmd of
     Gen -> G.genTestData oRows 
     Run -> do
-      let fn = testfn oRows
-      b <- doesFileExist fn
-      unless b $ do
-        putStrLn $ "creating " ++ fn ++ " as it doesnt exist"
-        G.genTestData oRows 
-        putStrLn $ "generated " ++ fn
+      fn <- createTestFileIfNotExist oRows
       O.perf fn
       H.perf fn
-    Criterion -> docriterion 
+    Criterion -> do
+      _ <- createTestFileIfNotExist small
+      _ <- createTestFileIfNotExist medium
+      _ <- createTestFileIfNotExist large
+      runCriterion 
+
+createTestFileIfNotExist :: Int -> IO FilePath
+createTestFileIfNotExist i = do
+  let fn = testfn i
+  b <- doesFileExist fn
+  unless b $ do
+    putStrLn $ "generating " ++ fn 
+    G.genTestData i 
+    putStrLn $ "generated " ++ fn
+  return fn
 
 {-
   xs <- getArgs
