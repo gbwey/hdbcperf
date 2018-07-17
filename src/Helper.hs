@@ -20,3 +20,8 @@ getTime = realToFrac <$> getPOSIXTime
 testfn :: Int -> FilePath
 testfn i = "test" ++ show i ++ ".dat"
 
+large, medium, small :: Int
+large = 100000
+medium = 10000
+small = 1000
+
