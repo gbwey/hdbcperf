@@ -55,13 +55,3 @@ testOdbcRawCommit fn = do
     exec conn "set implicit_transactions off"
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
       exec conn (fromString ("insert into OdbcRawCommit values(" ++ i ++ ",'" ++ s ++ "'," ++ d ++ ")"))
-
-{-
-*TestPerfOdbc> main
-create table OdbcTH
-create table OdbcRaw
-odbcTH before
-odbcTH: 155.40788865089417
-odbcraw before
-odbcraw: 139.72199153900146
--}
