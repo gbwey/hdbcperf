@@ -24,9 +24,11 @@ createTable tab = do
 perf :: FilePath -> IO ()  
 perf fn = do
   createTable "Prepared" 
+  createTable "PreparedCommit" 
   createTable "Run" 
   createTable "RunRaw" 
   time "hdbc prepared" $ testPrepared fn -- prepared 
+  time "hdbc prepared commit" $ testPreparedCommit fn 
   time "hdbc run" $ testRun fn  -- parameter binding but prepared each time
   time "hdbc runraw" $ testRunRaw fn -- no parameter binding ie raw string
 
@@ -43,6 +45,16 @@ testPrepared fn = do
         void $ H.execute insstmt [SqlInteger (read i), SqlString s, SqlDouble (read d)]  
   --      when (n `mod` 100 == 0) $ H.commit h
   
+testPreparedCommit :: FilePath -> IO ()  
+testPreparedCommit fn = do
+  let ins = "insert into PreparedCommit values (?,?,?)"
+  xs <- readFile fn
+  runSql $ \h -> do
+    bracket (H.prepare h ins) (H.finish) $ \insstmt -> do
+      forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
+        void $ H.execute insstmt [SqlInteger (read i), SqlString s, SqlDouble (read d)]  
+        H.commit h
+
 testRun :: FilePath -> IO ()  
 testRun fn = do
   let ins = "insert into Run values (?,?,?)"

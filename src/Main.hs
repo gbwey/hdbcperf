@@ -1,4 +1,3 @@
-{-# LANGUAGE RecordWildCards #-}
 {-# OPTIONS -Wall #-}
 module Main where
 import qualified TestPerfOdbc as O
@@ -15,6 +14,7 @@ criterion desc sz =
     , bench "odbc Raw" $ nfIO (O.createTable "OdbcRaw" >> O.testOdbcRaw fn)
     , bench "odbc Raw Commit" $ nfIO (O.createTable "OdbcRawCommit" >> O.testOdbcRawCommit fn)
     , bench "hdbc prepared" $ nfIO (H.createTable "Prepared" >> H.testPrepared fn)
+    , bench "hdbc prepared commit" $ nfIO (H.createTable "PreparedCommit" >> H.testPreparedCommit fn)
     , bench "hdbc run" $ nfIO (H.createTable "Run" >> H.testRun fn)
     , bench "hdbc runraw" $ nfIO (H.createTable "RunRaw" >> H.testRun fn)
     ]
