@@ -7,30 +7,46 @@ import Database.HDBC (SqlValue(..))
 import qualified Database.HDBC.ODBC as H
 import qualified Data.List.Split as SP
 import Control.Monad
+import Data.List
 import Control.Exception 
 import TestConnectionString (connstr)
-import Helper (time,testfn)
+import Helper 
 
 --connstr :: String  
 --connstr = "Driver={SQL Server Native Client 11.0};Server=?;Database=?;uid=?;pwd=?;MARS_Connection=YES"  
 
 createTable :: String -> IO ()
 createTable tab = do
-  putStrLn $ "create table " ++ tab
+--  putStrLn $ "create table " ++ tab
   runSql $ \h -> do
     H.runRaw h $ concat ["IF OBJECT_ID('dbo." ++ tab ++ "', 'U') IS NOT NULL DROP TABLE dbo." ++ tab ++ ";"
                         ,"create table " ++ tab ++ " (a int, b varchar(1000), c float)"]
  
+createTableWide :: String -> IO ()
+createTableWide tab = do
+--  putStrLn $ "create table " ++ tab
+  runSql $ \h -> do
+    H.runRaw h $ concat ["IF OBJECT_ID('dbo." ++ tab ++ "', 'U') IS NOT NULL DROP TABLE dbo." ++ tab ++ ";"
+                        ,"create table " ++ tab
+                        ," (" 
+                        ,intercalate "," (map (\i -> "i" ++ show i ++ " int not null") [1..10::Int])
+                        ,","
+                        ,intercalate "," (map (\i -> "s" ++ show i ++ " varchar(1000) not null") [1..10::Int])
+                        ," )"]
+ 
 perf :: FilePath -> IO ()  
 perf fn = do
   createTable "Prepared" 
-  createTable "PreparedCommit" 
   createTable "Run" 
   createTable "RunRaw" 
   time "hdbc prepared" $ testPrepared fn -- prepared 
-  time "hdbc prepared commit" $ testPreparedCommit fn 
-  time "hdbc run" $ testRun fn  -- parameter binding but prepared each time
+--  time "hdbc run" $ testRun fn  -- parameter binding but prepared each time
   time "hdbc runraw" $ testRunRaw fn -- no parameter binding ie raw string
+
+perfWide :: FilePath -> IO ()  
+perfWide fn = do
+  createTableWide "PreparedWide" 
+  time "hdbc prepared wide" $ testPreparedWide fn 
 
 runSql :: (H.Connection -> IO c) -> IO c
 runSql = bracket (H.connectODBC connstr) H.disconnect . flip H.withTransaction 
@@ -44,15 +60,17 @@ testPrepared fn = do
       forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
         void $ H.execute insstmt [SqlInteger (read i), SqlString s, SqlDouble (read d)]  
   --      when (n `mod` 100 == 0) $ H.commit h
+      H.commit h
   
-testPreparedCommit :: FilePath -> IO ()  
-testPreparedCommit fn = do
-  let ins = "insert into PreparedCommit values (?,?,?)"
+testPreparedWide :: FilePath -> IO ()  
+testPreparedWide fn = do
+  let ins = "insert into PreparedWide values (" ++ (intercalate "," (replicate 20 "?")) ++ ")"
   xs <- readFile fn
   runSql $ \h -> do
     bracket (H.prepare h ins) (H.finish) $ \insstmt -> do
-      forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
-        void $ H.execute insstmt [SqlInteger (read i), SqlString s, SqlDouble (read d)]  
+      forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,ss) -> do
+        void $ H.execute insstmt (map (SqlInteger . read) (take 10 ss) ++ map SqlString (drop 10 ss))  
+  --      when (n `mod` 100 == 0) $ H.commit h
         H.commit h
 
 testRun :: FilePath -> IO ()  
@@ -62,7 +80,8 @@ testRun fn = do
   runSql $ \h -> do 
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
       void $ H.run h ins [SqlInteger (read i), SqlString s, SqlDouble (read d)]
-  --    when (n `mod` 100 == 0) $ H.commit h
+      when (n `mod` 100 == 0) $ H.commit h
+    H.commit h
 
 testRunRaw :: FilePath -> IO ()  
 testRunRaw fn = do
@@ -71,6 +90,8 @@ testRunRaw fn = do
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
       H.runRaw h ("insert into RunRaw values(" ++ i ++ ",'" ++ s ++ "'," ++ d ++ ")")
       when (n `mod` 100 == 0) $ H.commit h
+    H.commit h
+
 
 {-
 >perf largefn
