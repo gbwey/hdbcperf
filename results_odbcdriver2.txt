@@ -1,0 +1,126 @@
+benchmarking small/odbc TH
+time                 162.8 ms   (156.0 ms .. 169.3 ms)
+                     0.998 R²   (0.995 R² .. 1.000 R²)
+mean                 159.7 ms   (153.2 ms .. 162.8 ms)
+std dev              6.100 ms   (1.821 ms .. 8.625 ms)
+variance introduced by outliers: 12% (moderately inflated)
+
+benchmarking small/odbc Raw
+time                 156.0 ms   (150.5 ms .. 163.1 ms)
+                     0.999 R²   (0.997 R² .. 1.000 R²)
+mean                 151.6 ms   (148.4 ms .. 153.8 ms)
+std dev              3.631 ms   (2.785 ms .. 4.428 ms)
+variance introduced by outliers: 12% (moderately inflated)
+
+benchmarking small/hdbc prepared
+time                 113.2 ms   (104.6 ms .. 126.0 ms)
+                     0.983 R²   (0.952 R² .. 0.999 R²)
+mean                 109.7 ms   (106.1 ms .. 115.1 ms)
+std dev              6.757 ms   (4.380 ms .. 9.188 ms)
+variance introduced by outliers: 20% (moderately inflated)
+
+benchmarking small/odbc TH Wide
+time                 224.1 ms   (211.7 ms .. 240.0 ms)
+                     0.998 R²   (0.997 R² .. 1.000 R²)
+mean                 233.4 ms   (227.9 ms .. 238.6 ms)
+std dev              7.253 ms   (4.537 ms .. 9.414 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking small/odbc Raw Wide
+time                 179.2 ms   (172.8 ms .. 185.8 ms)
+                     0.999 R²   (0.998 R² .. 1.000 R²)
+mean                 181.2 ms   (179.4 ms .. 182.9 ms)
+std dev              2.142 ms   (1.260 ms .. 3.262 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking small/hdbc prepared Wide
+time                 149.6 ms   (145.7 ms .. 155.6 ms)
+                     0.999 R²   (0.998 R² .. 1.000 R²)
+mean                 146.7 ms   (144.2 ms .. 148.4 ms)
+std dev              2.865 ms   (1.399 ms .. 4.419 ms)
+variance introduced by outliers: 12% (moderately inflated)
+
+benchmarking medium/odbc TH
+time                 1.027 s    (999.1 ms .. 1.058 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 1.015 s    (1.009 s .. 1.019 s)
+std dev              6.087 ms   (0.0 s .. 6.993 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc Raw
+time                 860.0 ms   (669.9 ms .. 1.081 s)
+                     0.992 R²   (0.973 R² .. 1.000 R²)
+mean                 855.2 ms   (815.8 ms .. 904.2 ms)
+std dev              44.97 ms   (0.0 s .. 51.04 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/hdbc prepared
+time                 688.1 ms   (598.6 ms .. 809.4 ms)
+                     0.997 R²   (0.989 R² .. NaN R²)
+mean                 652.8 ms   (614.9 ms .. 674.4 ms)
+std dev              33.79 ms   (0.0 s .. 37.44 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc TH Wide
+time                 1.819 s    (1.746 s .. 1.871 s)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 1.823 s    (1.808 s .. 1.833 s)
+std dev              15.48 ms   (0.0 s .. 17.84 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc Raw Wide
+time                 1.327 s    (1.274 s .. 1.372 s)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 1.330 s    (1.318 s .. 1.337 s)
+std dev              11.09 ms   (0.0 s .. 12.70 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/hdbc prepared Wide
+time                 965.0 ms   (814.2 ms .. 1.063 s)
+                     0.997 R²   (0.991 R² .. 1.000 R²)
+mean                 990.8 ms   (965.2 ms .. 1.008 s)
+std dev              25.17 ms   (0.0 s .. 29.05 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc TH
+time                 9.492 s    (9.088 s .. NaN s)
+                     1.000 R²   (0.999 R² .. NaN R²)
+mean                 9.684 s    (9.561 s .. 9.789 s)
+std dev              169.1 ms   (0.0 s .. 182.2 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc Raw
+time                 8.078 s    (8.035 s .. 8.148 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 8.132 s    (8.116 s .. 8.146 s)
+std dev              21.39 ms   (0.0 s .. 23.34 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/hdbc prepared
+time                 6.145 s    (NaN s .. 6.648 s)
+                     0.999 R²   (NaN R² .. 1.000 R²)
+mean                 6.133 s    (6.009 s .. 6.204 s)
+std dev              110.9 ms   (0.0 s .. 123.0 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc TH Wide
+time                 17.89 s    (17.59 s .. 18.14 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 17.94 s    (17.90 s .. 17.98 s)
+std dev              53.06 ms   (0.0 s .. 59.90 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc Raw Wide
+time                 13.01 s    (12.16 s .. 13.49 s)
+                     0.999 R²   (0.999 R² .. 1.000 R²)
+mean                 13.19 s    (13.00 s .. 13.28 s)
+std dev              162.1 ms   (0.0 s .. 162.4 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/hdbc prepared Wide
+time                 9.654 s    (9.406 s .. 9.937 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 9.456 s    (9.411 s .. 9.500 s)
+std dev              75.07 ms   (0.0 s .. 75.79 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
