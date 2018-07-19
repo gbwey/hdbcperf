@@ -55,14 +55,12 @@ testOdbcTH :: FilePath -> IO ()
 testOdbcTH fn = do
   xs <- readFile fn
   bracket (connect $ T.pack connstr) close $ \conn -> do
-    exec conn "set implicit_transactions on"
     exec conn "begin tran"
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
       let ii :: Int = read i
       let dd :: Double = read d
       let ss :: ByteString = B.pack s
       exec conn [sql|insert into OdbcTH values ($ii,$ss,$dd)|]
-    exec conn "set implicit_transactions off"
     exec conn "commit"
 
 testOdbcTHWide :: FilePath -> IO ()  
@@ -70,12 +68,10 @@ testOdbcTHWide fn = do
   xs <- readFile fn
   bracket (connect $ T.pack connstr) close $ \conn -> do
     exec conn "set implicit_transactions on"
-    exec conn "begin tran"
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,ss) -> do
       let [i1,i2,i3,i4,i5,i6,i7,i8,i9,i10::Int] = map read (take 10 ss)
       let [s1,s2,s3,s4,s5,s6,s7,s8,s9,s10] = map T.pack (drop 10 ss)
       exec conn [sql|insert into OdbcTHWide values ($i1,$i2,$i3,$i4,$i5,$i6,$i7,$i8,$i9,$i10,$s1,$s2,$s3,$s4,$s5,$s6,$s7,$s8,$s9,$s10)|]
-    exec conn "set implicit_transactions off"
     exec conn "commit"
 
 testOdbcRaw :: FilePath -> IO ()  
@@ -83,10 +79,8 @@ testOdbcRaw fn = do
   xs <- readFile fn
   bracket (connect (T.pack connstr)) close $ \conn -> do
     exec conn "set implicit_transactions on"
-    exec conn "begin tran"
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
       exec conn (fromString ("insert into OdbcRaw values(" ++ i ++ ",'" ++ s ++ "'," ++ d ++ ")"))
-    exec conn "set implicit_transactions off"
     exec conn "commit"
 
 testOdbcRawWide :: FilePath -> IO ()  
@@ -94,9 +88,17 @@ testOdbcRawWide fn = do
   xs <- readFile fn
   bracket (connect (T.pack connstr)) close $ \conn -> do
     exec conn "set implicit_transactions on"
-    exec conn "begin tran"
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,ss) -> do
       exec conn $ fromString $ "insert into OdbcRawWide values(" ++ intercalate "," (take 10 ss) ++ ",'" ++ (intercalate "','" (drop 10 ss)) ++ "')"
-    exec conn "set implicit_transactions off"
     exec conn "commit"
 
+
+teststuff :: IO ()  
+teststuff = do
+  bracket (connect $ T.pack connstr) close $ \conn -> do
+    exec conn "set implicit_transactions on"
+    let ii :: Int = 10
+    let ss :: T.Text = "\"'"
+    let dd :: Double =123.4
+    exec conn [sql|insert into OdbcTH values ($ii,$ss,$dd)|]
+    exec conn "commit"
