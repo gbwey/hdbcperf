@@ -85,22 +85,20 @@ testPreparedCommit :: FilePath -> IO ()
 testPreparedCommit fn = do
   let ins = "insert into PreparedCommit values (?,?,?)"
   xs <- readFile fn
-  bracket (H.connectODBC connstr) H.disconnect $ \h -> do 
+  runSql $ \h -> do 
     bracket (H.prepare h ins) (H.finish) $ \insstmt -> do
       forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
         void $ H.execute insstmt [SqlInteger (read i), SqlString s, SqlDouble (read d)]  
-  --      when (n `mod` 100 == 0) $ H.commit h
         H.commit h
 
 testPreparedCommitWide :: FilePath -> IO ()  
 testPreparedCommitWide fn = do
   let ins = "insert into PreparedCommitWide values (" ++ (intercalate "," (replicate 20 "?")) ++ ")"
   xs <- readFile fn
-  bracket (H.connectODBC connstr) H.disconnect $ \h -> do 
+  runSql $ \h -> do 
     bracket (H.prepare h ins) (H.finish) $ \insstmt -> do
       forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,ss) -> do
         void $ H.execute insstmt (map (SqlInteger . read) (take 10 ss) ++ map SqlString (drop 10 ss))  
-  --      when (n `mod` 100 == 0) $ H.commit h
         H.commit h
 
 testRun :: FilePath -> IO ()  

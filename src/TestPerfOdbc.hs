@@ -100,19 +100,17 @@ testOdbcRawCommit :: FilePath -> IO ()
 testOdbcRawCommit fn = do
   xs <- readFile fn
   bracket (connect (T.pack connstr)) close $ \conn -> do
-    exec conn "set implicit_transactions on"
+    exec conn "set implicit_transactions off"
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
       exec conn (fromString ("insert into OdbcRawCommit values(" ++ i ++ ",'" ++ s ++ "'," ++ d ++ ")"))
-    exec conn "commit"
 
 testOdbcRawCommitWide :: FilePath -> IO ()  
 testOdbcRawCommitWide fn = do
   xs <- readFile fn
   bracket (connect (T.pack connstr)) close $ \conn -> do
-    exec conn "set implicit_transactions on"
+    exec conn "set implicit_transactions off"
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,ss) -> do
       exec conn $ fromString $ "insert into OdbcRawCommitWide values(" ++ intercalate "," (take 10 ss) ++ ",'" ++ (intercalate "','" (drop 10 ss)) ++ "')"
-    exec conn "commit"
 
 teststuff :: IO ()  
 teststuff = do
