@@ -22,7 +22,7 @@ createTable tab = do
     $ fromString 
     $ concat ["IF OBJECT_ID('dbo." ++ tab ++ "', 'U') IS NOT NULL DROP TABLE dbo." ++ tab ++ ";"
              ,"create table " ++ tab ++ " (a int, b varchar(1000), c float)"]
- 
+
 createTableWide :: String -> IO ()
 createTableWide tab = do
 --  putStrLn $ "create table " ++ tab
@@ -41,21 +41,25 @@ perf :: FilePath -> IO ()
 perf fn = do
   createTable "OdbcTH" 
   createTable "OdbcRaw" 
+  createTable "OdbcRawCommit" 
   time "odbc TH" $ testOdbcTH fn  
   time "odbc raw" $ testOdbcRaw fn 
+  time "odbc raw commit" $ testOdbcRawCommit fn 
   
 perfWide :: FilePath -> IO ()  
 perfWide fn = do
   createTableWide "OdbcTHWide" 
   createTableWide "OdbcRawWide" 
+  createTableWide "OdbcRawCommitWide" 
   time "odbc TH wide" $ testOdbcTHWide fn 
   time "odbc raw wide" $ testOdbcRawWide fn 
-  
+  time "odbc raw wide commit" $ testOdbcRawCommitWide fn 
+
 testOdbcTH :: FilePath -> IO ()  
 testOdbcTH fn = do
   xs <- readFile fn
   bracket (connect $ T.pack connstr) close $ \conn -> do
-    exec conn "begin tran"
+    exec conn "set implicit_transactions on"
     forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
       let ii :: Int = read i
       let dd :: Double = read d
@@ -92,6 +96,23 @@ testOdbcRawWide fn = do
       exec conn $ fromString $ "insert into OdbcRawWide values(" ++ intercalate "," (take 10 ss) ++ ",'" ++ (intercalate "','" (drop 10 ss)) ++ "')"
     exec conn "commit"
 
+testOdbcRawCommit :: FilePath -> IO ()  
+testOdbcRawCommit fn = do
+  xs <- readFile fn
+  bracket (connect (T.pack connstr)) close $ \conn -> do
+    exec conn "set implicit_transactions on"
+    forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,[i,s,d]) -> do
+      exec conn (fromString ("insert into OdbcRawCommit values(" ++ i ++ ",'" ++ s ++ "'," ++ d ++ ")"))
+    exec conn "commit"
+
+testOdbcRawCommitWide :: FilePath -> IO ()  
+testOdbcRawCommitWide fn = do
+  xs <- readFile fn
+  bracket (connect (T.pack connstr)) close $ \conn -> do
+    exec conn "set implicit_transactions on"
+    forM_ (zip [1::Int ..] (SP.splitOn "\t" <$> lines xs)) $ \(n,ss) -> do
+      exec conn $ fromString $ "insert into OdbcRawCommitWide values(" ++ intercalate "," (take 10 ss) ++ ",'" ++ (intercalate "','" (drop 10 ss)) ++ "')"
+    exec conn "commit"
 
 teststuff :: IO ()  
 teststuff = do
