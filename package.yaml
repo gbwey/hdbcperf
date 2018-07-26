@@ -26,6 +26,7 @@ dependencies:
   - transformers
   - mtl
   - directory
+  - containers
   
 executables:
   hdbcperf:
