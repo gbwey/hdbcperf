@@ -1,0 +1,210 @@
+benchmarking small/odbc TH
+time                 158.0 ms   (144.4 ms .. 174.7 ms)
+                     0.994 R²   (0.985 R² .. 1.000 R²)
+mean                 148.7 ms   (141.3 ms .. 153.8 ms)
+std dev              8.587 ms   (5.082 ms .. 11.70 ms)
+variance introduced by outliers: 13% (moderately inflated)
+
+benchmarking small/odbc Raw
+time                 155.4 ms   (150.2 ms .. 160.1 ms)
+                     0.999 R²   (0.997 R² .. 1.000 R²)
+mean                 146.5 ms   (142.9 ms .. 149.5 ms)
+std dev              4.847 ms   (3.263 ms .. 6.587 ms)
+variance introduced by outliers: 12% (moderately inflated)
+
+benchmarking small/odbc Raw Commit
+time                 214.9 ms   (206.4 ms .. 222.4 ms)
+                     0.999 R²   (0.996 R² .. 1.000 R²)
+mean                 203.8 ms   (197.2 ms .. 208.3 ms)
+std dev              7.156 ms   (3.807 ms .. 10.71 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking small/hdbc prepared
+time                 114.1 ms   (109.9 ms .. 117.2 ms)
+                     0.999 R²   (0.996 R² .. 1.000 R²)
+mean                 112.5 ms   (110.6 ms .. 113.8 ms)
+std dev              2.381 ms   (1.247 ms .. 3.438 ms)
+variance introduced by outliers: 11% (moderately inflated)
+
+benchmarking small/hdbc prepared commit
+time                 210.0 ms   (10.34 ms .. 507.9 ms)
+                     0.535 R²   (0.050 R² .. 1.000 R²)
+mean                 227.0 ms   (179.9 ms .. 320.5 ms)
+std dev              101.4 ms   (3.091 ms .. 127.0 ms)
+variance introduced by outliers: 82% (severely inflated)
+
+benchmarking small/odbc TH Wide
+time                 236.5 ms   (232.6 ms .. 239.6 ms)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 231.1 ms   (228.5 ms .. 233.7 ms)
+std dev              3.287 ms   (2.486 ms .. 4.040 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking small/odbc Raw Wide
+time                 184.9 ms   (181.9 ms .. 188.6 ms)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 181.9 ms   (178.8 ms .. 183.5 ms)
+std dev              2.899 ms   (1.232 ms .. 3.929 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking small/odbc Raw Commit Wide
+time                 222.6 ms   (212.0 ms .. 230.9 ms)
+                     0.998 R²   (0.992 R² .. 1.000 R²)
+mean                 238.4 ms   (231.6 ms .. 255.3 ms)
+std dev              13.31 ms   (1.214 ms .. 18.03 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking small/hdbc prepared Wide
+time                 149.6 ms   (145.4 ms .. 154.9 ms)
+                     0.999 R²   (0.999 R² .. 1.000 R²)
+mean                 154.3 ms   (152.3 ms .. 155.9 ms)
+std dev              2.386 ms   (1.398 ms .. 3.801 ms)
+variance introduced by outliers: 12% (moderately inflated)
+
+benchmarking small/hdbc prepared commit Wide
+time                 250.4 ms   (227.8 ms .. 285.9 ms)
+                     0.995 R²   (0.991 R² .. 1.000 R²)
+mean                 240.7 ms   (234.1 ms .. 249.5 ms)
+std dev              8.700 ms   (3.111 ms .. 11.73 ms)
+variance introduced by outliers: 16% (moderately inflated)
+
+benchmarking medium/odbc TH
+time                 1.018 s    (972.6 ms .. 1.079 s)
+                     1.000 R²   (NaN R² .. 1.000 R²)
+mean                 1.012 s    (1.001 s .. 1.019 s)
+std dev              10.05 ms   (0.0 s .. 11.19 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc Raw
+time                 877.3 ms   (834.1 ms .. 959.0 ms)
+                     0.999 R²   (0.998 R² .. 1.000 R²)
+mean                 862.3 ms   (857.3 ms .. 866.9 ms)
+std dev              7.511 ms   (0.0 s .. 7.871 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc Raw Commit
+time                 1.309 s    (1.270 s .. 1.338 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 1.303 s    (1.295 s .. 1.307 s)
+std dev              6.760 ms   (0.0 s .. 7.151 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/hdbc prepared
+time                 672.8 ms   (NaN s .. 712.6 ms)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 681.6 ms   (672.8 ms .. 687.6 ms)
+std dev              9.041 ms   (0.0 s .. 10.42 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/hdbc prepared commit
+time                 1.423 s    (1.323 s .. 1.499 s)
+                     0.999 R²   (0.998 R² .. 1.000 R²)
+mean                 1.440 s    (1.417 s .. 1.455 s)
+std dev              23.66 ms   (0.0 s .. 27.24 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc TH Wide
+time                 1.864 s    (1.815 s .. 1.921 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 1.850 s    (1.833 s .. 1.860 s)
+std dev              15.50 ms   (272.4 as .. 17.09 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc Raw Wide
+time                 1.345 s    (1.278 s .. 1.415 s)
+                     0.999 R²   (0.999 R² .. 1.000 R²)
+mean                 1.305 s    (1.282 s .. 1.321 s)
+std dev              24.36 ms   (0.0 s .. 28.00 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/odbc Raw Commit Wide
+time                 1.863 s    (1.732 s .. 1.971 s)
+                     0.999 R²   (0.998 R² .. 1.000 R²)
+mean                 1.839 s    (1.815 s .. 1.852 s)
+std dev              21.29 ms   (0.0 s .. 24.01 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/hdbc prepared Wide
+time                 1.028 s    (992.0 ms .. 1.068 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 1.022 s    (1.016 s .. 1.027 s)
+std dev              8.123 ms   (0.0 s .. 8.874 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking medium/hdbc prepared commit Wide
+time                 1.802 s    (1.638 s .. 2.008 s)
+                     0.999 R²   (0.995 R² .. 1.000 R²)
+mean                 1.804 s    (1.769 s .. 1.831 s)
+std dev              40.56 ms   (0.0 s .. 46.05 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc TH
+time                 9.905 s    (9.015 s .. 11.52 s)
+                     0.997 R²   (0.993 R² .. 1.000 R²)
+mean                 9.479 s    (9.250 s .. 9.668 s)
+std dev              300.0 ms   (0.0 s .. 328.2 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc Raw
+time                 8.015 s    (7.270 s .. 8.641 s)
+                     0.999 R²   (0.998 R² .. 1.000 R²)
+mean                 7.845 s    (7.683 s .. 7.959 s)
+std dev              173.3 ms   (0.0 s .. 198.9 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc Raw Commit
+time                 12.41 s    (10.44 s .. 14.06 s)
+                     0.997 R²   (0.989 R² .. 1.000 R²)
+mean                 12.40 s    (11.97 s .. 12.66 s)
+std dev              391.4 ms   (0.0 s .. 442.3 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/hdbc prepared
+time                 6.349 s    (6.106 s .. 6.802 s)
+                     0.999 R²   (0.999 R² .. 1.000 R²)
+mean                 6.047 s    (5.883 s .. 6.161 s)
+std dev              171.3 ms   (0.0 s .. 197.3 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/hdbc prepared commit
+time                 13.34 s    (12.25 s .. 14.30 s)
+                     0.999 R²   (0.997 R² .. 1.000 R²)
+mean                 13.62 s    (13.43 s .. 13.75 s)
+std dev              199.1 ms   (0.0 s .. 228.7 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc TH Wide
+time                 18.17 s    (17.85 s .. 18.69 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 18.14 s    (18.05 s .. 18.20 s)
+std dev              80.77 ms   (0.0 s .. 91.96 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc Raw Wide
+time                 13.29 s    (13.09 s .. 13.64 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 13.20 s    (13.15 s .. 13.27 s)
+std dev              63.95 ms   (0.0 s .. 71.10 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/odbc Raw Commit Wide
+time                 17.25 s    (16.96 s .. 17.93 s)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 18.07 s    (17.91 s .. 18.38 s)
+std dev              270.1 ms   (0.0 s .. 271.6 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/hdbc prepared Wide
+time                 10.04 s    (NaN s .. 10.79 s)
+                     0.999 R²   (0.999 R² .. 1.000 R²)
+mean                 9.816 s    (9.721 s .. 9.995 s)
+std dev              155.3 ms   (0.0 s .. 158.1 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking large/hdbc prepared commit Wide
+time                 18.09 s    (16.81 s .. 20.29 s)
+                     0.998 R²   (0.996 R² .. 1.000 R²)
+mean                 17.66 s    (17.33 s .. 17.91 s)
+std dev              375.8 ms   (0.0 s .. 427.5 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
