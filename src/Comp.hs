@@ -10,13 +10,14 @@ import Control.Monad
 (<&>) :: (Functor f) => f a -> (a -> b) -> f b
 (<&>) = flip fmap
 
-fn1, fn2, fn3, fn4, fn5, fn6 :: FilePath
+fn1, fn2, fn3, fn4, fn5, fn6, fn7 :: FilePath
 fn1 = "ubuntu1604_virtualbox1_20170724.txt"
 fn2 = "ubuntu1604_virtualbox2_20170724.txt"
 fn3 = "ubuntu1604_virtualbox_shuffle1_20170725.txt"
 fn4 = "windows1_20170724.txt"
 fn5 = "ubuntu1604_virtualbox1_HACKAGEHDBC_20170725.txt"
 fn6 = "ubuntu1604_virtualbox3_20170726.txt"
+fn7 = "windows_hackagehdbc.txt"
 
 load :: FilePath -> IO (Map String FS)
 load fn = do
@@ -81,9 +82,15 @@ prt s m | null m = return ()
                         forM_ (M.toList m) $ \(k,fs2) -> putStrLn $ padRight 40 k ++ " " ++ prt' fs2
 
 prt' :: (FS,FS) -> String
-prt' (f1, f2) = 
+prt' z@(f1, f2) = 
    let xx = if on (==) getMeasure f1 f2 then "" else "Different measures!"
-   in padLeft 10 (prt'' f1) ++ " " ++ padLeft 10 (prt'' f2) ++ " " ++ xx
+   in padLeft 10 (prt'' f1) ++ " " ++ padLeft 10 (prt'' f2) ++ padLeft 10 (show (ratio z)) ++ " " ++ xx
+
+ratio :: (FS,FS) -> Float 
+ratio (f1,f2) = 
+  let a = calc f1
+      b = calc f2
+  in fromIntegral (truncate ((if a > b then a / b else - b / a) * 100)) / 100
 
 prt'' :: FS -> String
 prt'' (FS f x) = show f ++ case x of 
