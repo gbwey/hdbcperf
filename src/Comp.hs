@@ -73,7 +73,7 @@ dump' e f1 f2 = do
   m <- comp f1 f2 
   let (a,b) = goodbad e m
   prt ("good:within tolerance " ++ show e) a
-  prt "bad" b
+  prt ("bad: outside tolerance " ++ show e) b
   
 prt :: String -> Map String (FS, FS) -> IO ()
 prt s m | null m = return ()
