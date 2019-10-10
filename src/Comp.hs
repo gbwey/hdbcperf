@@ -1,5 +1,5 @@
 {-# OPTIONS -Wall #-}
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE LambdaCase, TypeApplications #-}
 module Comp where
 import Data.List
 import qualified Data.Map.Strict as M
@@ -21,7 +21,7 @@ fn7 = "windows_hackagehdbc.txt"
 
 load :: FilePath -> IO (Map String FS)
 load fn = do
-  xs <- lines <$> readFile fn 
+  xs <- lines <$> readFile fn
   return $ M.fromListWith (\a b -> error $ "duplicate " ++ show (a,b)) (loadImpl xs)
 
 data FS = FS Float Measure deriving (Show,Eq)
@@ -32,28 +32,28 @@ getMeasure (FS _ x) = x
 
 loadImpl :: [String] -> [(String, FS)]
 loadImpl ss =
-  let zs = concat $ ss <&> 
+  let zs = concat $ ss <&>
              \s -> case words s of
                      "benchmarking":ys -> [Left (unwords ys)]
-                     "mean":a:b:_ -> case b of 
+                     "mean":a:b:_ -> case b of
                                       "s" -> [Right $ FS (read a) Sec]
                                       "ms" -> [Right $ FS (read a) Milli]
                                       _ -> error $ "unknown mean measure " ++ b
                      _ -> []
-     
+
       ws = take ((length zs `div` 2) * 2) zs
-   in chunksOf 2 ws <&> \case 
+   in chunksOf 2 ws <&> \case
               [Left a,Right b] -> (a,b)
               o -> error $ "oops expected left right pair only!" ++ show o
-                                                 
-chunksOf :: Int -> [a] -> [[a]]                   
-chunksOf n = unfoldr (\s -> if null s then Nothing else Just $ splitAt n s) 
+
+chunksOf :: Int -> [a] -> [[a]]
+chunksOf n = unfoldr (\s -> if null s then Nothing else Just $ splitAt n s)
 
 comp :: FilePath -> FilePath -> IO (Map String (FS,FS))
 comp f1 f2 = do
   m1 <- load f1
   m2 <- load f2
-  forM_ (M.keys (m1 M.\\ m2)) $ \k -> putStrLn $ ">>> warning: " ++ padRight 40 k ++ " key missing from right" 
+  forM_ (M.keys (m1 M.\\ m2)) $ \k -> putStrLn $ ">>> warning: " ++ padRight 40 k ++ " key missing from right"
   forM_ (M.keys (m2 M.\\ m1)) $ \k -> putStrLn $ ">>> warning: " ++ padRight 40 k ++ " key missing from left"
   return $ M.intersectionWith (,) m1 m2
 
@@ -61,20 +61,20 @@ goodbad :: Float -> Map String (FS, FS) -> (Map String (FS, FS), Map String (FS,
 goodbad e = M.partition (\(a,b) -> let v = on (/) calc a b in v >= 1-e && v <= 1+e)
 
 calc :: FS -> Float
-calc (FS f x) = f * case x of 
+calc (FS f x) = f * case x of
                  Sec -> 1000
                  Milli -> 1
 
-dump :: FilePath -> FilePath -> IO () 
+dump :: FilePath -> FilePath -> IO ()
 dump = dump' 0.1
 
-dump' :: Float -> FilePath -> FilePath -> IO () 
+dump' :: Float -> FilePath -> FilePath -> IO ()
 dump' e f1 f2 = do
-  m <- comp f1 f2 
+  m <- comp f1 f2
   let (a,b) = goodbad e m
-  prt ("good:within tolerance " ++ show e) a
+  prt ("good: within tolerance " ++ show e) a
   prt ("bad: outside tolerance " ++ show e) b
-  
+
 prt :: String -> Map String (FS, FS) -> IO ()
 prt s m | null m = return ()
         | otherwise = do
@@ -82,18 +82,18 @@ prt s m | null m = return ()
                         forM_ (M.toList m) $ \(k,fs2) -> putStrLn $ padRight 40 k ++ " " ++ prt' fs2
 
 prt' :: (FS,FS) -> String
-prt' z@(f1, f2) = 
+prt' z@(f1, f2) =
    let xx = if on (==) getMeasure f1 f2 then "" else "Different measures!"
    in padLeft 10 (prt'' f1) ++ " " ++ padLeft 10 (prt'' f2) ++ padLeft 10 (show (ratio z)) ++ " " ++ xx
 
-ratio :: (FS,FS) -> Float 
-ratio (f1,f2) = 
+ratio :: (FS,FS) -> Float
+ratio (f1,f2) =
   let a = calc f1
       b = calc f2
-  in fromIntegral (truncate ((if a > b then a / b else - b / a) * 100)) / 100
+  in fromIntegral @Integer (truncate ((if a > b then a / b else - b / a) * 100)) / 100
 
 prt'' :: FS -> String
-prt'' (FS f x) = show f ++ case x of 
+prt'' (FS f x) = show f ++ case x of
                              Sec -> "s"
                              Milli -> "ms"
 
