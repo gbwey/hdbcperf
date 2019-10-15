@@ -109,7 +109,3 @@ do1 rows mcommitcnt commitcnt = do
   time (txt2 "hdbc Hex runraw") $ H.testRunRawHex commitcnt fnh
   H.createTableHex "RunRawString"
   time (txt2 "hdbc String runraw") $ H.testRunRawString commitcnt fns
-
-
-
-
