@@ -1,4 +1,3 @@
-{-# LANGUAGE RecordWildCards #-}
 {-# OPTIONS -Wall #-}
 module Main1 where
 import qualified TestPerfOdbc as O
@@ -7,7 +6,6 @@ import qualified GenTestData as G
 import Options.Applicative hiding (option,header)
 import Options.Applicative
 import Helper
---import Data.Monoid
 
 main :: IO ()
 main = do
@@ -22,11 +20,11 @@ withInfo :: Parser a -> String -> ParserInfo a
 withInfo opts desc = info (helper <*> opts) $ progDesc desc
 
 runit :: MyOptions -> IO ()
-runit MyOptions {..} = do
-  case oCmd of
-    Gen -> G.genTestData oRows
+runit opts = do
+  case oCmd opts of
+    Gen -> G.genTestData (oRows opts)
     Run -> do
-      fn <- G.createTestFileIfNotExist oRows
+      fn <- G.createTestFileIfNotExist (oRows opts)
       O.perf fn
       H.perf fn
 
