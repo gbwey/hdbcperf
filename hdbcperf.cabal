@@ -1,0 +1,54 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: a75b24d2b308b84c1af66f2f1634c687bed62779ab464ed782779f01926dbb1a
+
+name:           hdbcperf
+version:        0.1.0.0
+category:       Web
+homepage:       https://github.com/gbwey/hdbcperf#readme
+author:         Grant Weyburne
+maintainer:     gbwey9@gmail.com
+copyright:      2018 gbwey
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+executable hdbcperf
+  main-is: Main.hs
+  other-modules:
+      Comp
+      GenTestData
+      Helper
+      Main1
+      TestConnectionString
+      TestPerf
+      TestPerfOdbc
+      Paths_hdbcperf
+  hs-source-dirs:
+      src
+  ghc-options: -threaded
+  build-depends:
+      HDBC ==2.4.0.3
+    , HDBC-odbc ==2.5.0.2
+    , QuickCheck
+    , base >=4.7 && <5
+    , bytestring
+    , clock
+    , containers
+    , criterion
+    , directory
+    , formatting
+    , mtl
+    , odbc ==0.3
+    , optparse-applicative
+    , split
+    , text
+    , time
+    , transformers
+  default-language: Haskell2010

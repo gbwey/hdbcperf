@@ -1,4 +1,1 @@
-*.dat
-*.txt
-*.cabal
 .stack-work/
