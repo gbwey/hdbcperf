@@ -1,10 +1,8 @@
-resolver: lts-13.25
+resolver: lts-14.10
 
 packages:
 - location: '.'
-- location: ../hdbc-odbc
-  extra-dep: true
-- location: ../hdbc
+- location: ../hdbc-odbc2
   extra-dep: true
 - location: ../odbc
   extra-dep: true

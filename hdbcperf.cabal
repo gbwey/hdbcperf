@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a75b24d2b308b84c1af66f2f1634c687bed62779ab464ed782779f01926dbb1a
+-- hash: 72579fc76c5d8c6ff56d4837a4c93cfc09824e0b8ff080c5a80a170ee90345db
 
 name:           hdbcperf
 version:        0.1.0.0
@@ -34,9 +34,7 @@ executable hdbcperf
       src
   ghc-options: -threaded
   build-depends:
-      HDBC ==2.4.0.3
-    , HDBC-odbc ==2.5.0.2
-    , QuickCheck
+      QuickCheck
     , base >=4.7 && <5
     , bytestring
     , clock
@@ -44,6 +42,7 @@ executable hdbcperf
     , criterion
     , directory
     , formatting
+    , hdbc-odbc2
     , mtl
     , odbc ==0.3
     , optparse-applicative
